@@ -12,7 +12,7 @@ The manual in the docs directory ("docs/manual.pdf") explains
 how to build and run your Cuckoo application.
 
 The current Cuckoo source repository tree is accessible through Github at
-"...".  
+https://github.com/interdroid/cuckoo-library and https://github.com/interdroid/cuckoo-plugin.  
 
 ** Third party libraries included with Cuckoo **
 
