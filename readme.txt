@@ -14,7 +14,7 @@ how to build and run your Cuckoo application.
 The current Cuckoo source repository tree is accessible through Github at
 "...".  
 
-** Third party libraries included with Ibis **
+** Third party libraries included with Cuckoo **
 
 This product includes software developed by the Apache Software
 Foundation (http://www.apache.org/).
