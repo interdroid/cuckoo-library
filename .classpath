@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="external/android/android.jar"/>
+	<classpathentry kind="lib" path="external/client-only/commons-math3-3.1.1.jar"/>
+	<classpathentry kind="lib" path="external/client-only/gcm.jar"/>
+	<classpathentry kind="lib" path="external/client-only/slf4j-api-1.6.2.jar"/>
+	<classpathentry kind="lib" path="external/client-only/slf4j-on-android-1.6.2.jar"/>
+	<classpathentry kind="lib" path="external/server-only/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="external/server-only/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="external/server-only/fluent-hc-4.2.5.jar"/>
+	<classpathentry kind="lib" path="external/server-only/gcm-server.jar"/>
+	<classpathentry kind="lib" path="external/server-only/httpclient-4.2.5.jar"/>
+	<classpathentry kind="lib" path="external/server-only/httpclient-cache-4.2.5.jar"/>
+	<classpathentry kind="lib" path="external/server-only/httpcore-4.2.4.jar"/>
+	<classpathentry kind="lib" path="external/server-only/httpmime-4.2.5.jar"/>
+	<classpathentry kind="lib" path="external/server-only/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="external/server-only/slf4j-api-1.5.3.jar"/>
+	<classpathentry kind="lib" path="external/server-only/slf4j-log4j12-1.5.3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

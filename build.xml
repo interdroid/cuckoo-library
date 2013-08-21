@@ -1,0 +1,87 @@
+<project name="Cuckoo Libraries" basedir="." default="build">
+
+	<description>
+		Build file for Cuckoo Libraries.
+    </description>
+
+	<property name="src" location="src" />
+	<property name="tmp" location="tmp" />
+	<property name="lib" location="lib" />
+	<property name="external" location="external" />
+
+	<path id="external_jars_server">
+		<fileset dir="${external}">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${external}/server-only">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${external}/android">
+					<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<path id="external_jars_client">
+		<fileset dir="${external}">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${external}/client-only">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${external}/android">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<target name="build" depends="clean" description="build the JARs and documentation">
+
+		<!-- Create the distribution end tmp directory -->
+		<mkdir dir="${lib}/client" />
+		<mkdir dir="${lib}/server" />
+		<mkdir dir="${tmp}" />
+		<mkdir dir="${tmp}/client" />
+		<mkdir dir="${tmp}/server" />
+
+		<!-- Compile the java code from ${src} into ${tmp} -->
+		<javac debug="on" destdir="${tmp}/server" includeantruntime="false" source="1.6" srcdir="${src}" target="1.6" includes="**" excludes="**/client/**,**/obsolete/**">
+			<classpath refid="external_jars_server" />
+		</javac>
+
+		<javac debug="on" destdir="${tmp}/client" includeantruntime="false" source="1.6" srcdir="${src}" target="1.6" includes="**" excludes="**/swan/**/Remote**,**/server/**,**/obsolete/**">
+			<classpath refid="external_jars_client" />
+		</javac>
+
+		<jar basedir="${tmp}/client" includes="**" excludes="**/server/**" jarfile="${lib}/client/cuckoo-client.jar">
+		</jar>
+		<jar basedir="${tmp}/server" includes="**" excludes="**/client/**" jarfile="${lib}/server/cuckoo-server.jar">
+		</jar>
+
+		<!-- Copy external libraries to lib directory -->
+		<delete dir="${tmp}" />
+		<copy todir="${lib}/client">
+			<fileset dir="${external}">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="${external}/client-only">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+		<copy todir="${lib}/server">
+			<fileset dir="${external}">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="${external}/server-only">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="${external}/android">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="clean" description="clean up">
+		<delete dir="${tmp}" />
+		<delete dir="${lib}" />
+	</target>
+
+</project>
