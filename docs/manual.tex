@@ -81,7 +81,10 @@ application.
   \item Eclipse integrates with the Android plugin for the Eclipse IDE. Download
   and install Eclipse and the Android plugin (ADT) as described at:
   \url{http://www.eclipse.org} and
-  \url{http://developer.android.com/tools/sdk/eclipse-adt.html}
+  \url{http://developer.android.com/tools/sdk/eclipse-adt.html}. Please check
+  the versions of the Android Plugin and SDK with the SDK Manager in Eclipse.
+  The Android SDK Build Tools are tested with version 18.0.1, the Android SDK
+  Tools with version 22.0.5.
   \item Download the Cuckoo library from github: \\
   \url{https://github.com/interdroid/cuckoo-library}.\\
   Compile the library to
@@ -94,8 +97,9 @@ application.
   Make sure that you uncheck: ``Group items by category''. Select ``Cuckoo
   Plugin Feature''. Press the ``Next'' button. Continue the wizard until the
   plugin is installed. Restart Eclipse.
-  \item Set the Cuckoo Library Location in the Eclipse Preferences. Open the
-  Eclipse Preferences from the menu. Select ``Cuckoo Preferences'', enter the
+  \item Set the Cuckoo Library Location in the Eclipse Preferences (Mac:
+  Eclipse $>$ Preferences, Ubuntu: Window $>$ Preferences).
+  Open the Eclipse Preferences from the menu. Select ``Cuckoo Preferences'', enter the
   path to the root directory of the Cuckoo library, make sure that the library
   contains the jar files in the ``lib'' directory.
 \end{itemize}
@@ -117,9 +121,9 @@ right-clicking on the project and selecting ``Make Offloadable with Cuckoo''
 from the ``Android Tools'' menu item in the context menu.
 
 Then the Cuckoo libraries are added to your project (i.e. in the libs
-directory), a dummy remote implementation is generated in the directory ``modified'' within
-your project root directory, and the jar resulting from this remote
-implementation is put in the ``assets'' folder of your project. Furthermore the
+directory), a dummy remote implementation is generated in the directory
+``remote'' within your project root directory, and the jar resulting from this
+remote implementation is put in the ``assets'' folder of your project. Furthermore the
 code that is generated for the stub/proxy pair as a result of the AIDL
 specification is altered, so that Cuckoo calls are inserted.
 
@@ -128,7 +132,9 @@ implementation. You might want to copy-paste the local implementation from your
 service, or create an entirely different implementation. Keep in mind that the
 remote code cannot access Android specific libraries that are not purely
 implemented in Java. The Eclipse plugin automatically compiles your Java code
-into the jar that is placed in the assets folder.
+into the jar that is placed in the assets folder. You can use external libries
+for your remote implementation. Place them in the
+``remote/$<$packagename$>$/external'' directory.
 
 Make sure you add the following permissions to the AndroidManifest as they are
 required by the Cuckoo runtime:
