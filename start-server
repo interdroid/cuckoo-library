@@ -1,2 +1,2 @@
 #!/bin/bash
-java -cp .:* -Dlog4j.configuration=file:log4j.properties interdroid.cuckoo.server.CuckooServer 
+java -cp .:lib/server/* -Dlog4j.configuration=file:log4j.properties interdroid.cuckoo.server.CuckooServer 
