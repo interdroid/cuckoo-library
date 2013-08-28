@@ -22,18 +22,17 @@ public class Util {
 	}
 
 	public static SQLiteDatabase openDB(Context context) {
-		File dbDir = new File("/sdcard/db.db");
-		try {
-			dbDir.createNewFile();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// File dbDir = context.getDir("databases", Context.MODE_PRIVATE);
-		// SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(new
-		// File(dbDir,
-		// "db"), null);
-		SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(dbDir, null);
+		// File dbDir = new File("/sdcard/db.db");
+		// try {
+		// dbDir.createNewFile();
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		File dbDir = context.getDir("databases", Context.MODE_PRIVATE);
+		SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(new File(dbDir,
+				"db"), null);
+//		SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(dbDir, null);
 		if (db.getVersion() < DB_VERSION) {
 			db.execSQL("DROP TABLE IF EXISTS execution");
 			db.execSQL("CREATE TABLE execution (_id integer primary key autoincrement, method text, resource text, time number)");

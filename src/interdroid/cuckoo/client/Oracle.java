@@ -79,20 +79,21 @@ public class Oracle {
 	 * @param statistics
 	 */
 	public static void storeStatistics(final Context context,
-			final String methodName, Statistics statistics) {
+			final String methodName, final Statistics statistics) {
 		Log.d(TAG, (doNotStore ? "NOT " : "") + "Storing statistics for '"
 				+ methodName + "': " + statistics);
 		if (doNotStore) {
 			return;
 		}
-		System.out.println(statistics);
+		System.out.println("new: " + statistics);
 		boolean networkStable = ContextState.stopMonitoringNetwork(context);
 
 		// we only keep historic information for WiFi (and only when the network
 		// has been stable and it indeed was remotely executed)
-		if (ContextState.getNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI
-				&& networkStable
-				&& !statistics.resource.getHostname().equals("local")) {
+
+		if (!statistics.resource.getHostname().equals("local")
+				&& ContextState.getNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI
+				&& networkStable) {
 			String bssid = ContextState.getWifiInfo().getBSSID();
 			boolean lan = Arrays.asList(statistics.resource.getBssids())
 					.contains(bssid);
@@ -118,7 +119,8 @@ public class Oracle {
 		// start a monitor here to look for tail costs for 3G
 		new Thread() {
 			public void run() {
-				if (ContextState.getNetworkInfo().getType() == ConnectivityManager.TYPE_MOBILE
+				if (!statistics.resource.getHostname().equals("local")
+						&& ContextState.getNetworkInfo().getType() == ConnectivityManager.TYPE_MOBILE
 						&& (ContextState.getNetworkInfo().getSubtype() == TelephonyManager.NETWORK_TYPE_UMTS
 								|| ContextState.getNetworkInfo().getSubtype() == TelephonyManager.NETWORK_TYPE_HSDPA
 								|| ContextState.getNetworkInfo().getSubtype() == TelephonyManager.NETWORK_TYPE_HSPA || ContextState
